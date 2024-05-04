@@ -53,3 +53,4 @@ console.log(separated(string))
 //new commit from branch task_6_1
 //new commit from branch task_7
 //new commit from branch task_8
+//new commit for main
