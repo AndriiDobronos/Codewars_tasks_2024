@@ -45,11 +45,7 @@ console.log(separated(string))
 //   ]
 //new commit on the branch task_2
 //new commit on the branch task_3
-<<<<<<< HEAD
  //new commit on the branch task_4
-=======
-  
->>>>>>> task_3
 //new commit on the branch task_5
 //new commit on the branch task_5_1
 // new commit on the branch task_6
