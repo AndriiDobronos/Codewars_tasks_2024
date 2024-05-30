@@ -31,36 +31,56 @@ function score( dice ) {
     let cameIn1 = false
     let cameIn2 = false
     let cameIn3 = false
-    let cameIn4 = false
-    let cameIn5 = false
-    const diceCopy = dice.slice()
-    let elValue = null
+    const diceCopy = [...dice]
     diceCopy.sort((a,b)=> a-b)
     diceCopy.forEach((el,index)=>{
         if(diceCopy[index] === diceCopy[index+4] && index < 1 && !cameIn1){
             result += el===1 ? 1200 : el===5 ? 600 : el*100
+            diceCopy.splice(0,5);
             cameIn1 = true
-            console.log('1',result)
-        }else if(diceCopy[index] === diceCopy[index+3] && index < 2 && !cameIn2 && !cameIn1){
+            console.log('1',result,":",diceCopy)
+        }
+        if(diceCopy[index] === diceCopy[index+3] &&  !cameIn2 && !cameIn1){
             result += el===1 ? 1100 : el===5 ? 550 : el*100
+            diceCopy.splice(index,4);
             cameIn2 = true
-            console.log("2",result)
-        }else if(diceCopy[index] === diceCopy[index+2] && index < 3 && !cameIn1 && !cameIn2 && !cameIn3){
+            console.log("2",result,":",diceCopy)
+        }
+        if(diceCopy[index] === diceCopy[index+2] &&!cameIn1 && !cameIn2 && !cameIn3){
             result += el===1 ? 1000 : el*100
+            diceCopy.splice(index,3);
             cameIn3 = true
-            elValue = el
-            console.log("3",result)
-        }else if(el === 1 && !cameIn1) {
-            result += 100
-            console.log('4',result)
-        }else if(el === 5 && !cameIn1 && (!cameIn3 && elValue === 5)) {
-            result += 50
-            console.log('5',result)
+            console.log("3",result,":",diceCopy)
         }
     })
+    diceCopy.forEach((el,index)=>{
+        if(el === 1 ) {
+            result += 100
+            diceCopy.splice(diceCopy.indexOf(el),1);
+            console.log('4',result,":",diceCopy)
+        }
+        if(el === 5 ) {
+            result += 50
+            diceCopy.splice(diceCopy.indexOf(el),1);
+            console.log('5',result,":",diceCopy)
+        }
+    })
+    diceCopy.forEach((el,index)=>{
+        if(el === 5 ) {
+            result += 50
+            diceCopy.splice(diceCopy.indexOf(el),1);
+            console.log('5',result,":",diceCopy)
+        }
+        if(el === 1 ) {
+            result += 100
+            diceCopy.splice(diceCopy.indexOf(el),1);
+            console.log('4',result,":",diceCopy)
+        }
+    })
+
     return result
 }
-//console.log(score( [2, 3, 4, 6, 2] )) //0
-//console.log(score( [4, 4, 4, 3, 3] )) //400
-console.log(score([5, 5, 3, 3, 5]))
-console.log(score([2,4,4,5,4]))
+console.log(score( [1, 1 ,2, 3, 6] )) //0
+//console.log(score( [4, 4, 4, 1, 3] )) //500
+//console.log(score([5, 5, 3, 3, 5]))//500
+//console.log(score([1,4,4,5,4]))//400
